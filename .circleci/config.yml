@@ -1,5 +1,17 @@
-steps:
-  - checkout
-  - run: pip install -r requirements.txt
-  - run: pip install -r test_requirements.txt
-  - run: PYTHONPATH=. pytest
+version: 2.1
+
+jobs:
+  build-and-test:
+    machine:
+      image: ubuntu-2004:current
+
+    steps:
+      - checkout
+      - run: pip install -r requirements.txt
+      - run: pip install -r test_requirements.txt
+      - run: PYTHONPATH=. pytest
+
+workflows:
+  basic:
+    jobs:
+      - build-and-test
